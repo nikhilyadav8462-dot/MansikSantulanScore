@@ -1,236 +1,395 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Mental Health Signal — Student Wellness Analytics</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mental Health Signal – Student Wellness Analytics</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Sora:wght@600;700&display=swap">
+<style>
+:root{--bg:#F5F7FC;--alt:#ECEFF9;--card:#fff;--ink:#11162B;--muted:#5B6480;--line:#E1E6F3;--p:#5B45F0;--p2:#4630D6;--pl:#EAE7FF;--on:#fff;--err:#D92D20;--shadow:0 1px 2px rgba(17,22,43,.05),0 14px 34px -14px rgba(60,50,160,.22);--f:'Manrope','Segoe UI',Arial,sans-serif;--h:'Sora','Trebuchet MS',sans-serif}
+@media(prefers-color-scheme:dark){:root{--bg:#0A0E1F;--alt:#0E1430;--card:#141B38;--ink:#E8ECFA;--muted:#9AA4C4;--line:#232C52;--p:#8B7BFF;--p2:#A79BFF;--pl:#232050;--on:#0A0E1F;--err:#FF8A80;--shadow:none}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;font-family:var(--f);background:var(--bg);color:var(--ink);line-height:1.7;font-size:16px}
+h1,h2,h3,.num,.logo{font-family:var(--h)}
+.c{max-width:1120px;margin:0 auto;padding:0 20px}
+nav{position:sticky;top:0;z-index:30;background:rgba(10,14,31,.86);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.08)}
+nav .c{display:flex;align-items:center;height:64px;gap:22px;overflow-x:auto;white-space:nowrap}
+.logo{font-weight:700;font-size:18px;color:#fff;margin-right:auto}
+nav a{text-decoration:none;color:#b8c0e0;font-size:14.5px;font-weight:500}
+nav a:hover,nav a:focus-visible{color:#fff}
+.hero{position:relative;overflow:hidden;color:#fff;padding:88px 0 140px;background:radial-gradient(700px 420px at 85% 8%,rgba(124,92,255,.5),transparent 60%),radial-gradient(600px 380px at 4% 95%,rgba(34,211,197,.3),transparent 60%),#0A0E1F}
+.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:44px 44px;-webkit-mask-image:linear-gradient(#000,transparent 85%);mask-image:linear-gradient(#000,transparent 85%)}
+.hg{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:44px;align-items:center}
+.hero h1{font-size:clamp(34px,5.2vw,58px);line-height:1.1;letter-spacing:-.02em;margin:0 0 18px;font-weight:700}
+.hero p{color:#c3cae6;font-size:18px;max-width:54ch;margin:0}
+.badge{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);padding:6px 16px;border-radius:99px;font-size:14px;margin-bottom:22px;color:#e6eaff}
+.badge i{width:8px;height:8px;border-radius:50%;background:#22D3C5;box-shadow:0 0 0 4px rgba(34,211,197,.25)}
+.btn{display:inline-block;padding:13px 28px;border-radius:10px;font-weight:700;text-decoration:none;margin:26px 12px 0 0;background:linear-gradient(135deg,#8B7BFF,#22D3C5);color:#07102A}
+.btn.o{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.4)}
+.btn:focus-visible,input:focus-visible,select:focus-visible,.seg:focus-visible,.sub:focus-visible,.ghost:focus-visible,summary:focus-visible{outline:3px solid #22D3C5;outline-offset:2px}
+.hv{padding:34px 14px 24px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:26px;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);text-align:center}
+.hv svg{width:100%;max-width:360px;height:auto}
+.gt{fill:none;stroke:rgba(255,255,255,.15);stroke-width:16;stroke-linecap:round}
+.gf{fill:none;stroke:url(#gg);stroke-width:16;stroke-linecap:round;stroke-dasharray:377;stroke-dashoffset:377;animation:fl 1.8s .3s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes fl{to{stroke-dashoffset:106}}
+.gn{fill:#fff;font:700 54px var(--h)}
+.gs{fill:#aab3d6;font:500 13px var(--f)}
+.chips{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:8px}
+.chips span{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);border-radius:99px;padding:6px 14px;font-size:13.5px;color:#e6eaff}
+.stats{margin-top:-60px;position:relative;z-index:2}
+.stats .c{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 16px;text-align:center;box-shadow:var(--shadow)}
+.stat b{display:block;font:700 30px var(--h);color:var(--p)}
+.stat span{color:var(--muted);font-size:14px}
+section{padding:84px 0}
+.alt{background:var(--alt)}
+.t{text-align:center;margin-bottom:44px}
+.t h2{font-size:clamp(26px,3.6vw,38px);margin:0 0 10px;letter-spacing:-.01em}
+.t h2::after{content:"";display:block;width:52px;height:4px;border-radius:4px;margin:14px auto 0;background:linear-gradient(90deg,#5B45F0,#14B8A6)}
+.t p{color:var(--muted);max-width:60ch;margin:0 auto}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px;box-shadow:var(--shadow)}
+.card .ic{width:52px;height:52px;border-radius:14px;background:var(--pl);display:grid;place-items:center;font-size:26px;margin-bottom:14px}
+.card h3{margin:0 0 8px;font-size:18px}
+.card p{margin:0;color:var(--muted);font-size:15px}
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.fs{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px 14px;text-align:center;box-shadow:var(--shadow)}
+.fs .n{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#5B45F0,#14B8A6);color:#fff;display:grid;place-items:center;margin:0 auto 12px;font:700 16px var(--h)}
+.fs h3{font-size:16px;margin:0 0 6px}
+.fs p{font-size:13.5px;color:var(--muted);margin:0}
+.tw{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;min-width:600px;font-size:15px}
+th{background:var(--p);color:var(--on);text-align:left;padding:14px 18px;font-weight:600}
+td{padding:13px 18px;border-bottom:1px solid var(--line)}
+tr:last-child td{border:0}
+.pred{display:grid;grid-template-columns:1.3fr .7fr;gap:24px;align-items:start}
+fieldset{border:0;padding:0;margin:0 0 24px}
+legend{font:700 17px var(--h);color:var(--p);margin-bottom:14px;padding:0}
+.g2,.g3{display:grid;gap:14px}
+.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}
+.field label{display:block;font-size:14px;font-weight:600;margin-bottom:4px}
+input,select{width:100%;padding:11px 12px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;font-size:15px}
+input:focus,select:focus{border-color:var(--p)}
+.hint{font-size:12px;color:var(--muted)}
+.em{display:block;font-size:12px;color:var(--err)}
+.invalid{border-color:var(--err)}
+.unit{position:relative}.unit input{padding-right:46px}.unit span{position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:13px;color:var(--muted)}
+.segs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.seg{padding:10px 4px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font:600 14px var(--f);cursor:pointer}
+.seg.on{background:var(--p);color:var(--on);border-color:var(--p)}
+.sub{width:100%;background:linear-gradient(135deg,#5B45F0,#7C5CFF);color:#fff;border:0;border-radius:12px;padding:15px;font:700 16px var(--f);cursor:pointer}
+.sub:hover{filter:brightness(1.08)}.sub:disabled{opacity:.6;cursor:wait}
+.card.res{position:sticky;top:88px;text-align:center;min-height:380px;display:flex;flex-direction:column;justify-content:center;color:#fff;border:0;background:linear-gradient(160deg,#17114A,#2B1F9E 55%,#0F8F88)}
+.res[hidden],.st[hidden]{display:none}
+.res h3{color:#fff}
+.res .note,.res .card p{color:#c9d0f0}
+.res .ic{background:rgba(255,255,255,.14)}
+.res #s-err .ic,.res #se{color:#ffb4ae!important}
+.num{font-size:80px;font-weight:700;color:var(--p);line-height:1.1}
+.num small{font-size:24px;opacity:.7}
+.res .num{color:#fff}
+.bar{height:12px;border-radius:6px;background:linear-gradient(90deg,#ef4444,#f59e0b,#22c55e);position:relative;margin:22px 0 14px}
+.bar i{position:absolute;top:-6px;width:6px;height:24px;border-radius:3px;background:var(--ink);transition:left .5s;left:0}
+.res .bar i{background:#fff}
+.band{font:700 20px var(--h);margin:0}
+.note{font-size:13.5px;color:var(--muted)}
+.spin{width:44px;height:44px;border:4px solid rgba(255,255,255,.2);border-top-color:#fff;border-radius:50%;margin:0 auto 14px;animation:r 1s linear infinite}
+@keyframes r{to{transform:rotate(360deg)}}
+.ghost{margin-top:16px;background:transparent;color:var(--p);border:1.5px solid var(--p);border-radius:10px;padding:9px 18px;font:600 14px var(--f);cursor:pointer}
+.res .ghost{color:#fff;border-color:rgba(255,255,255,.6)}
+.tech{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.tech span{background:var(--card);border:1px solid var(--line);padding:10px 20px;border-radius:99px;font-weight:600;box-shadow:var(--shadow)}
+details{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin-top:12px}
+summary{cursor:pointer;font-weight:700}
+details p{margin:10px 0 0;color:var(--muted)}
+.team .card{text-align:center}
+.av{width:78px;height:78px;border-radius:50%;background:var(--pl);margin:0 auto 12px;display:grid;place-items:center;font-size:32px}
+footer{background:#0A0E1F;color:#98a2c8;text-align:center;padding:28px 0;font-size:14px}
+.mini{margin-top:18px;text-align:left}
+.mini svg{width:100%;height:auto;display:block}
+.ml{fill:none;stroke:#fff;stroke-width:2.5;stroke-linejoin:round}
+.md{fill:#22D3C5;stroke:#fff;stroke-width:2}
+.ma{fill:rgba(255,255,255,.12)}
+.mg{stroke:rgba(255,255,255,.2);stroke-width:1}
+.mt{fill:#c9d0f0;font-size:10px;font-family:var(--f)}
+.res .mini .note{color:#c9d0f0;margin:0}
+.hh{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.hh h3{margin:0}.hh .ghost{margin:0}
+.hsum{display:flex;flex-wrap:wrap;gap:28px;margin:16px 0 4px}
+.hsum b{display:block;font:700 24px var(--h);color:var(--p);line-height:1.2}
+.hsum span{font-size:13px;color:var(--muted)}
+#hist svg{width:100%;height:auto;display:block;margin:12px 0 20px}
+.hl{fill:none;stroke:var(--p);stroke-width:2.5;stroke-linejoin:round}
+.hd{fill:var(--p);stroke:var(--card);stroke-width:2}
+.hg-l{stroke:var(--line);stroke-width:1}
+.ht{fill:var(--muted);font-size:11px;font-family:var(--f)}
+#hist table{min-width:480px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.gf{stroke-dashoffset:106}}
+@media(max-width:900px){.hg,.pred{grid-template-columns:1fr}.stats .c{grid-template-columns:repeat(2,1fr)}.flow{grid-template-columns:1fr 1fr}.card.res{position:static}section{padding:58px 0}.hero{padding:60px 0 120px}}
+@media(max-width:560px){.g2,.g3,.flow{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
+<nav><div class="c"><span class="logo">🧠 Mental Health Signal</span><a href="#home">Home</a><a href="#about">About</a><a href="#how">Working</a><a href="#data">Dataset</a><a href="#predict">Predictor</a><a href="#tech">Technology</a><a href="#team">Team</a></div></nav>
 
-<div class="noise-overlay" aria-hidden="true"></div>
+<header class="hero" id="home"><div class="c hg">
+<div>
+<span class="badge"><i></i>Final Year Project · Machine Learning</span>
+<h1>Understand your digital habits before they affect your mind.</h1>
+<p>A web app that predicts a student’s mental health score from 0 to 10 using screen time, sleep, physical activity and stress, powered by a trained ML model and a FastAPI backend.</p>
+<a class="btn" href="#predict">Try the Predictor</a><a class="btn o" href="#how">How it works</a>
+</div>
+<div class="hv">
+<svg viewBox="0 0 320 190" role="img" aria-label="Sample score gauge showing 7.2 out of 10">
+<defs><linearGradient id="gg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8B7BFF"/><stop offset="1" stop-color="#22D3C5"/></linearGradient></defs>
+<path class="gt" d="M 40 170 A 120 120 0 0 1 280 170"/>
+<path class="gf" d="M 40 170 A 120 120 0 0 1 280 170"/>
+<text class="gn" x="160" y="136" text-anchor="middle">7.2</text>
+<text class="gs" x="160" y="162" text-anchor="middle">sample score out of 10</text>
+</svg>
+<div class="chips"><span>😴 Sleep 7.5 h</span><span>📱 Screen 4 h</span><span>🧘 Stress Medium</span></div>
+</div>
+</div></header>
 
-<header class="site-header">
-  <div class="header-inner">
-    <span class="eyebrow">Student Wellness Analytics</span>
-    <h1 class="title">Mental Health <em>Signal</em></h1>
-    <p class="subtitle">A quick read on how habits, screen time, and stress are trending — modeled from your daily rhythm, not a diagnosis.</p>
-  </div>
-</header>
+<div class="stats"><div class="c">
+<div class="stat"><b>12</b><span>Input Features</span></div><div class="stat"><b>0–10</b><span>Score Range</span></div>
+<div class="stat"><b>3</b><span>Academic Levels</span></div><div class="stat"><b>12</b><span>Social Platforms</span></div>
+</div></div>
 
-<main class="layout">
+<section id="about"><div class="c">
+<div class="t"><h2>About the Project</h2><p>Why we built it and what it does.</p></div>
+<div class="grid">
+<div class="card"><div class="ic">❓</div><h3>Problem Statement</h3><p>Students often miss the slow build-up of stress from long screen hours, poor sleep and low activity.</p></div>
+<div class="card"><div class="ic">🎯</div><h3>Objective</h3><p>Give students a quick self-check of their well-being based on daily habits.</p></div>
+<div class="card"><div class="ic">🤖</div><h3>Solution</h3><p>An ML regression model behind a web form that returns a score in seconds.</p></div>
+<div class="card"><div class="ic">👩‍🎓</div><h3>Target Users</h3><p>School and college students, and institutions studying habit trends.</p></div>
+</div></div></section>
 
-  <!-- FORM PANEL -->
-  <section class="panel form-panel" aria-labelledby="form-heading">
-    <form id="predict-form" novalidate>
+<section id="how" class="alt"><div class="c">
+<div class="t"><h2>How It Works</h2><p>From user input to the final score.</p></div>
+<div class="flow">
+<div class="fs"><div class="n">1</div><h3>User Input</h3><p>Student fills the form</p></div>
+<div class="fs"><div class="n">2</div><h3>Validation</h3><p>Ranges and fields checked</p></div>
+<div class="fs"><div class="n">3</div><h3>Preprocessing</h3><p>Encoding and scaling</p></div>
+<div class="fs"><div class="n">4</div><h3>ML Model</h3><p>Regression predicts score</p></div>
+<div class="fs"><div class="n">5</div><h3>Result</h3><p>Score and reading shown</p></div>
+</div></div></section>
 
-      <fieldset class="group">
-        <legend><span class="legend-index">01</span> Profile</legend>
-        <div class="grid grid-3">
-          <div class="field">
-            <label for="age">Age</label>
-            <input type="number" id="age" name="age" min="10" max="100" step="1" required placeholder="e.g. 21" />
-            <span class="hint">10–100</span>
-            <span class="error-msg" data-for="age"></span>
-          </div>
-          <div class="field">
-            <label for="gender">Gender</label>
-            <select id="gender" name="gender" required>
-              <option value="" disabled selected hidden>Select</option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-            </select>
-            <span class="error-msg" data-for="gender"></span>
-          </div>
-          <div class="field">
-            <label for="country">Country</label>
-            <input type="text" id="country" name="country" list="country-list" required placeholder="e.g. India" autocomplete="off" />
-            <datalist id="country-list">
-              <option value="India"></option>
-              <option value="USA"></option>
-              <option value="Canada"></option>
-              <option value="Australia"></option>
-              <option value="UK"></option>
-              <option value="Germany"></option>
-              <option value="Mexico"></option>
-              <option value="Turkey"></option>
-              <option value="France"></option>
-            </datalist>
-            <span class="hint">Not listed? Type it anyway.</span>
-            <span class="error-msg" data-for="country"></span>
-          </div>
-        </div>
-      </fieldset>
+<section id="data"><div class="c">
+<div class="t"><h2>Dataset and Features</h2><p>Every form field is one input to the model.</p></div>
+<div class="tw"><table>
+<tr><th>Category</th><th>Feature</th><th>Type</th><th>Purpose</th></tr>
+<tr><td>Profile</td><td>Age, Gender, Country</td><td>Numeric / Categorical</td><td>Baseline differences</td></tr>
+<tr><td>Academic</td><td>Academic Level</td><td>Categorical</td><td>Workload by study stage</td></tr>
+<tr><td>Digital</td><td>Most-used Platform, Primary Purpose</td><td>Categorical</td><td>How the phone is used</td></tr>
+<tr><td>Digital</td><td>Daily Screen Time, Phone Unlocks</td><td>Numeric</td><td>Amount of digital use</td></tr>
+<tr><td>Lifestyle</td><td>Study Hours, Physical Activity, Sleep</td><td>Numeric</td><td>Daily routine</td></tr>
+<tr><td>Stress</td><td>Perceived Stress Level</td><td>Ordinal</td><td>Self-reported strain</td></tr>
+</table></div></div></section>
 
-      <fieldset class="group">
-        <legend><span class="legend-index">02</span> Academic &amp; Digital Habits</legend>
-        <div class="grid grid-2">
-          <div class="field">
-            <label for="academic_level">Academic level</label>
-            <select id="academic_level" name="academic_level" required>
-              <option value="" disabled selected hidden>Select</option>
-              <option value="High School">High School</option>
-              <option value="Undergraduate">Undergraduate</option>
-              <option value="Graduate">Graduate</option>
-            </select>
-            <span class="error-msg" data-for="academic_level"></span>
-          </div>
-          <div class="field">
-            <label for="most_used_platform">Most-used platform</label>
-            <select id="most_used_platform" name="most_used_platform" required>
-              <option value="" disabled selected hidden>Select</option>
-              <option value="Facebook">Facebook</option>
-              <option value="Instagram">Instagram</option>
-              <option value="Snapchat">Snapchat</option>
-              <option value="Twitter">Twitter</option>
-              <option value="YouTube">YouTube</option>
-              <option value="TikTok">TikTok</option>
-              <option value="LinkedIn">LinkedIn</option>
-              <option value="LINE">LINE</option>
-              <option value="KakaoTalk">KakaoTalk</option>
-              <option value="VKontakte">VKontakte</option>
-              <option value="WhatsApp">WhatsApp</option>
-              <option value="WeChat">WeChat</option>
-            </select>
-            <span class="error-msg" data-for="most_used_platform"></span>
-          </div>
-          <div class="field">
-            <label for="purpose_of_use">Primary purpose</label>
-            <select id="purpose_of_use" name="purpose_of_use" required>
-              <option value="" disabled selected hidden>Select</option>
-              <option value="Networking">Networking</option>
-              <option value="Education">Education</option>
-              <option value="Entertainment">Entertainment</option>
-              <option value="News">News</option>
-            </select>
-            <span class="error-msg" data-for="purpose_of_use"></span>
-          </div>
-          <div class="field">
-            <label for="avg_daily_usage_hours">Avg. daily screen time</label>
-            <div class="unit-input">
-              <input type="number" id="avg_daily_usage_hours" name="avg_daily_usage_hours" min="0" max="24" step="0.1" required placeholder="0.0" />
-              <span class="unit">hrs</span>
-            </div>
-            <span class="error-msg" data-for="avg_daily_usage_hours"></span>
-          </div>
-          <div class="field">
-            <label for="daily_unlocks">Daily phone unlocks</label>
-            <input type="number" id="daily_unlocks" name="daily_unlocks" min="0" step="1" required placeholder="e.g. 60" />
-            <span class="error-msg" data-for="daily_unlocks"></span>
-          </div>
-        </div>
-      </fieldset>
+<section id="predict" class="alt"><div class="c">
+<div class="t"><h2>Check Your Signal</h2><p>Fill in your details to get a predicted score. This is not a diagnosis.</p></div>
+<div class="pred">
+<form class="card" id="predict-form" novalidate>
+<fieldset><legend>Profile</legend><div class="g3">
+<div class="field"><label for="age">Age</label><input type="number" id="age" name="age" min="10" max="100" step="1" placeholder="e.g. 21"><span class="hint">10–100</span><span class="em" data-for="age"></span></div>
+<div class="field"><label for="gender">Gender</label><select id="gender" name="gender"><option value="" selected disabled hidden>Select</option><option>Male</option><option>Female</option></select><span class="em" data-for="gender"></span></div>
+<div class="field"><label for="country">Country</label><input type="text" id="country" name="country" list="cl" placeholder="e.g. India" autocomplete="off"><datalist id="cl"><option value="India"><option value="USA"><option value="Canada"><option value="Australia"><option value="UK"><option value="Germany"><option value="Mexico"><option value="Turkey"><option value="France"></datalist><span class="hint">Not listed? Type it anyway.</span><span class="em" data-for="country"></span></div>
+</div></fieldset>
+<fieldset><legend>Academic &amp; Digital Habits</legend><div class="g2">
+<div class="field"><label for="academic_level">Academic level</label><select id="academic_level" name="academic_level"><option value="" selected disabled hidden>Select</option><option>High School</option><option>Undergraduate</option><option>Graduate</option></select><span class="em" data-for="academic_level"></span></div>
+<div class="field"><label for="most_used_platform">Most-used platform</label><select id="most_used_platform" name="most_used_platform"><option value="" selected disabled hidden>Select</option><option>Facebook</option><option>Instagram</option><option>Snapchat</option><option>Twitter</option><option>YouTube</option><option>TikTok</option><option>LinkedIn</option><option>LINE</option><option>KakaoTalk</option><option>VKontakte</option><option>WhatsApp</option><option>WeChat</option></select><span class="em" data-for="most_used_platform"></span></div>
+<div class="field"><label for="purpose_of_use">Primary purpose</label><select id="purpose_of_use" name="purpose_of_use"><option value="" selected disabled hidden>Select</option><option>Networking</option><option>Education</option><option>Entertainment</option><option>News</option></select><span class="em" data-for="purpose_of_use"></span></div>
+<div class="field"><label for="avg_daily_usage_hours">Avg. daily screen time</label><div class="unit"><input type="number" id="avg_daily_usage_hours" name="avg_daily_usage_hours" min="0" max="24" step="0.1" placeholder="0.0"><span>hrs</span></div><span class="em" data-for="avg_daily_usage_hours"></span></div>
+<div class="field"><label for="daily_unlocks">Daily phone unlocks</label><input type="number" id="daily_unlocks" name="daily_unlocks" min="0" step="1" placeholder="e.g. 60"><span class="em" data-for="daily_unlocks"></span></div>
+</div></fieldset>
+<fieldset><legend>Lifestyle &amp; Stress</legend><div class="g3">
+<div class="field"><label for="study_hours">Study hours / day</label><div class="unit"><input type="number" id="study_hours" name="study_hours" min="0" max="24" step="0.1" placeholder="0.0"><span>hrs</span></div><span class="em" data-for="study_hours"></span></div>
+<div class="field"><label for="physical_activity_hours">Physical activity / day</label><div class="unit"><input type="number" id="physical_activity_hours" name="physical_activity_hours" min="0" max="24" step="0.1" placeholder="0.0"><span>hrs</span></div><span class="em" data-for="physical_activity_hours"></span></div>
+<div class="field"><label for="sleep_hours_per_night">Sleep / night</label><div class="unit"><input type="number" id="sleep_hours_per_night" name="sleep_hours_per_night" min="0" max="24" step="0.1" placeholder="0.0"><span>hrs</span></div><span class="em" data-for="sleep_hours_per_night"></span></div>
+</div>
+<div class="field" style="margin-top:14px"><label id="sl">Perceived stress level</label>
+<div class="segs" role="group" aria-labelledby="sl"><button type="button" class="seg" data-v="Low">Low</button><button type="button" class="seg" data-v="Medium">Medium</button><button type="button" class="seg" data-v="High">High</button><button type="button" class="seg" data-v="Very High">Very High</button></div>
+<input type="hidden" id="stress_level" name="stress_level"><span class="em" data-for="stress_level"></span></div>
+</fieldset>
+<button type="submit" class="sub" id="sub">Read my signal</button>
+</form>
 
-      <fieldset class="group">
-        <legend><span class="legend-index">03</span> Lifestyle &amp; Stress</legend>
-        <div class="grid grid-3">
-          <div class="field">
-            <label for="study_hours">Study hours / day</label>
-            <div class="unit-input">
-              <input type="number" id="study_hours" name="study_hours" min="0" max="24" step="0.1" required placeholder="0.0" />
-              <span class="unit">hrs</span>
-            </div>
-            <span class="error-msg" data-for="study_hours"></span>
-          </div>
-          <div class="field">
-            <label for="physical_activity_hours">Physical activity / day</label>
-            <div class="unit-input">
-              <input type="number" id="physical_activity_hours" name="physical_activity_hours" min="0" max="24" step="0.1" required placeholder="0.0" />
-              <span class="unit">hrs</span>
-            </div>
-            <span class="error-msg" data-for="physical_activity_hours"></span>
-          </div>
-          <div class="field">
-            <label for="sleep_hours_per_night">Sleep / night</label>
-            <div class="unit-input">
-              <input type="number" id="sleep_hours_per_night" name="sleep_hours_per_night" min="0" max="24" step="0.1" required placeholder="0.0" />
-              <span class="unit">hrs</span>
-            </div>
-            <span class="error-msg" data-for="sleep_hours_per_night"></span>
-          </div>
-          <div class="field field-span">
-            <label for="stress_level">Perceived stress level</label>
-            <div class="segmented" id="stress_level_group" data-name="stress_level">
-              <button type="button" class="seg-btn" data-value="Low">Low</button>
-              <button type="button" class="seg-btn" data-value="Medium">Medium</button>
-              <button type="button" class="seg-btn" data-value="High">High</button>
-              <button type="button" class="seg-btn" data-value="Very High">Very High</button>
-            </div>
-            <input type="hidden" id="stress_level" name="stress_level" required />
-            <span class="error-msg" data-for="stress_level"></span>
-          </div>
-        </div>
-      </fieldset>
+<aside class="card res" aria-live="polite">
+<div class="st" id="s-idle"><div class="ic" style="margin:0 auto 12px">📊</div><h3>Your score will appear here</h3><p class="note">Submit the form to get a predicted score from 0 to 10.</p></div>
+<div class="st" id="s-load" hidden><div class="spin"></div><h3>Reading the signal…</h3><p class="note">Running your habits through the model. The first request can take up to a minute while the server wakes up.</p></div>
+<div class="st" id="s-res" hidden><div class="note">Predicted score</div><div class="num"><span id="sn">0.0</span><small>/10</small></div>
+<div class="bar"><i id="mk"></i></div><p class="band" id="sb"></p><p class="note" id="sc"></p><div class="mini" id="mini" aria-live="polite"></div><button type="button" class="ghost" id="again">Run another read</button></div>
+<div class="st" id="s-err" hidden><div class="ic" style="margin:0 auto 12px;color:var(--err)">!</div><p id="se" style="color:var(--err)"></p><button type="button" class="ghost" id="retry">Try again</button></div>
+</aside>
+</div>
+<div class="card" id="hist" style="margin-top:24px">
+<div class="hh"><h3>Your Score History</h3><button type="button" class="ghost" id="hist-clear" hidden>Clear history</button></div>
+<p class="note" style="margin:4px 0 0">Saved only in this browser. Your last 20 reads are kept.</p>
+<div id="hist-body"></div>
+</div>
+</div></section>
 
-      <div class="form-footer">
-        <button type="submit" class="submit-btn" id="submit-btn">
-          <span class="btn-label">Read my signal</span>
-          <span class="btn-spinner" aria-hidden="true"></span>
-        </button>
-      </div>
-    </form>
-  </section>
+<section id="tech"><div class="c">
+<div class="t"><h2>Technology Stack</h2><p>Tools used to build and deploy the project.</p></div>
+<div class="tech"><span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>Python</span><span>Flask / FastAPI</span><span>scikit-learn</span><span>pandas</span><span>Render</span></div>
+</div></section>
 
-  <!-- RESULT PANEL -->
-  <aside class="panel result-panel" aria-live="polite">
-    <div class="result-inner" id="result-inner">
+<section class="alt"><div class="c">
+<div class="t"><h2>Model Performance</h2><p>Replace the dashes with your real test-set results.</p></div>
+<div class="grid">
+<div class="card" style="text-align:center"><h3>R² Score</h3><div class="num" style="font-size:44px">—</div></div>
+<div class="card" style="text-align:center"><h3>MAE</h3><div class="num" style="font-size:44px">—</div></div>
+<div class="card" style="text-align:center"><h3>RMSE</h3><div class="num" style="font-size:44px">—</div></div>
+</div>
+<details><summary>Limitations</summary><p>The score is an estimate from self-reported habits, not a clinical assessment. Results depend on the training data.</p></details>
+<details><summary>Future Scope</summary><p>Feature-importance charts, score history per user, more diverse data, and counselling resource links.</p></details>
+<details><summary>If you feel low</summary><p>Please talk to a trusted person or a counsellor. In India, Tele-MANAS (14416) offers free mental health support.</p></details>
+</div></section>
 
-      <div class="state state-idle" id="state-idle">
-        <svg class="gauge gauge-idle" viewBox="0 0 240 160" aria-hidden="true">
-          <path class="gauge-track" d="M 30 140 A 100 100 0 0 1 210 140" />
-          <g class="gauge-ticks"></g>
-        </svg>
-        <p class="idle-label">Your score will appear here</p>
-        <p class="idle-copy">Fill in the form and submit to generate a predicted mental health score from 0–10.</p>
-      </div>
+<section id="team"><div class="c">
+<div class="t"><h2>Our Team</h2><p>Developed by Nikhil Yadav under the guidance of Archana Acharya.</p></div>
+<div class="grid team" style="max-width:640px;margin:0 auto">
+<div class="card"><div class="av">👤</div><h3>Nikhil Yadav</h3><p>Developer · BTAD24O1042</p></div>
+<div class="card"><div class="av">👩‍🏫</div><h3>Archana Acharya</h3><p>Project Mentor</p></div>
+</div>
+</div></section>
 
-      <div class="state state-loading" id="state-loading" hidden>
-        <div class="pulse-ring"></div>
-        <p class="loading-label">Reading the signal…</p>
-        <p class="loading-copy">Running your habits through the model.</p>
-      </div>
+<footer>Final Year Project by Nikhil Yadav (BTAD24O1042) · Mentor: Archana Acharya · For informational purposes only, not a clinical assessment. If you're struggling, please talk to someone you trust.</footer>
 
-      <div class="state state-result" id="state-result" hidden>
-        <svg class="gauge gauge-result" viewBox="0 0 240 160" aria-hidden="true">
-          <defs>
-            <linearGradient id="gaugeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#D9534F"/>
-              <stop offset="45%" stop-color="#E3B341"/>
-              <stop offset="100%" stop-color="#4C9A78"/>
-            </linearGradient>
-          </defs>
-          <path class="gauge-track" d="M 30 140 A 100 100 0 0 1 210 140" />
-          <path class="gauge-fill" id="gauge-fill" d="M 30 140 A 100 100 0 0 1 210 140" />
-          <g class="gauge-ticks"></g>
-          <circle class="gauge-needle-hub" cx="120" cy="140" r="5" />
-        </svg>
-        <div class="score-readout">
-          <span class="score-number" id="score-number">0.0</span>
-          <span class="score-max">/10</span>
-        </div>
-        <p class="score-band" id="score-band">—</p>
-        <p class="score-context" id="score-context"></p>
-        <button type="button" class="reset-btn" id="reset-btn">Run another read</button>
-      </div>
+<script>
+// >>> Agar tumhara backend route alag hai to sirf ye line badlo <<<
+var API_URL = 'https://mansiksantulanscore-1.onrender.com/predict';
 
-      <div class="state state-error" id="state-error" hidden>
-        <div class="error-icon" aria-hidden="true">!</div>
-        <p class="error-copy" id="error-copy"></p>
-        <button type="button" class="reset-btn" id="error-retry-btn">Try again</button>
-      </div>
+var $ = function (i) { return document.getElementById(i); };
+var form = $('predict-form');
+var NUM = ['age','avg_daily_usage_hours','daily_unlocks','study_hours','physical_activity_hours','sleep_hours_per_night'];
+var TXT = ['gender','country','academic_level','most_used_platform','purpose_of_use','stress_level'];
+var LIMITS = { age:[10,100], avg_daily_usage_hours:[0,24], daily_unlocks:[0,10000], study_hours:[0,24], physical_activity_hours:[0,24], sleep_hours_per_night:[0,24] };
 
-    </div>
-  </aside>
+function show(id) { ['s-idle','s-load','s-res','s-err'].forEach(function (s) { $(s).hidden = (s !== id); }); }
 
-</main>
+document.querySelectorAll('.seg').forEach(function (b) {
+  b.addEventListener('click', function () {
+    document.querySelectorAll('.seg').forEach(function (x) { x.classList.remove('on'); });
+    b.classList.add('on'); $('stress_level').value = b.dataset.v; setErr('stress_level', '');
+  });
+});
 
-<footer class="site-footer">
-  <p>Built for informational purposes only — this is not a clinical assessment. If you're struggling, please talk to someone you trust.</p>
-</footer>
+function setErr(name, msg) {
+  var e = document.querySelector('.em[data-for="' + name + '"]'); if (e) e.textContent = msg;
+  var f = $(name); if (f && f.type !== 'hidden') f.classList.toggle('invalid', !!msg);
+}
 
-<script src="script.js"></script>
+function validate() {
+  var ok = true;
+  NUM.concat(TXT).forEach(function (n) {
+    var v = $(n).value.trim(), msg = '';
+    if (!v) msg = 'This field is required.';
+    else if (LIMITS[n]) {
+      var x = parseFloat(v);
+      if (isNaN(x) || x < LIMITS[n][0] || x > LIMITS[n][1]) msg = 'Enter a value from ' + LIMITS[n][0] + ' to ' + LIMITS[n][1] + '.';
+    }
+    setErr(n, msg); if (msg) ok = false;
+  });
+  return ok;
+}
+
+function band(s) {
+  if (s >= 7.5) return ['Good balance', 'Your habits point to a healthy routine. Keep it up.'];
+  if (s >= 5)   return ['Moderate', 'Mixed signals. Sleep, screen time or stress may need attention.'];
+  return ['Needs attention', 'Several strain signals. Consider talking to someone you trust.'];
+}
+
+function pickScore(d) {
+  var k = ['predicted_mental_health_score','prediction','predicted_score','score','mental_health_score','result'];
+  for (var i = 0; i < k.length; i++) { if (d && d[k[i]] !== undefined) return parseFloat(d[k[i]]); }
+  return NaN;
+}
+
+form.addEventListener('submit', function (e) {
+  e.preventDefault();
+  if (!validate()) return;
+  var p = {};
+  NUM.forEach(function (n) { var x = parseFloat($(n).value); p[n] = (n === 'age' || n === 'daily_unlocks') ? Math.round(x) : x; });
+  TXT.forEach(function (n) { p[n] = $(n).value.trim(); });
+  $('sub').disabled = true; show('s-load');
+  fetch(API_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(p) })
+    .then(function (r) { return r.json().then(function (d) { if (!r.ok) throw new Error(typeof d.detail === 'string' ? d.detail : 'Invalid input or server error'); return d; }); })
+    .then(function (d) {
+      var s = pickScore(d);
+      if (isNaN(s)) throw new Error('Unexpected response from server.');
+      s = Math.max(0, Math.min(10, s));
+      var b = band(s);
+      $('sn').textContent = s.toFixed(1); $('sb').textContent = b[0]; $('sc').textContent = b[1];
+      $('mk').style.left = 'calc(' + (s * 10) + '% - 3px)';
+      saveHist(s, p); show('s-res');
+    })
+    .catch(function (err) { $('se').textContent = 'Could not get a score: ' + err.message + '. Check your inputs and try again.'; show('s-err'); })
+    .then(function () { $('sub').disabled = false; });
+});
+
+$('again').addEventListener('click', function () { form.reset(); document.querySelectorAll('.seg').forEach(function (x) { x.classList.remove('on'); }); show('s-idle'); $('predict').scrollIntoView(); });
+$('retry').addEventListener('click', function () { show('s-idle'); });
+
+/* ---------- Score history + trend chart ---------- */
+var HK = 'mhs_history';
+function esc(t) { return String(t).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+function loadHist() { try { var h = JSON.parse(localStorage.getItem(HK) || '[]'); return Array.isArray(h) ? h : []; } catch (e) { return []; } }
+function saveHist(s, p) {
+  var h = loadHist();
+  h.push({ t: Date.now(), s: s, sl: p.sleep_hours_per_night, sc: p.avg_daily_usage_hours, st: p.stress_level });
+  h = h.slice(-20);
+  try { localStorage.setItem(HK, JSON.stringify(h)); } catch (e) {}
+  renderMini(h);
+  renderHist();
+}
+function renderMini(all) {
+  var h = all.filter(function (r) { return r && typeof r.s === 'number'; }), el = $('mini'), n = h.length;
+  if (n < 2) { el.innerHTML = '<p class="note" style="margin-top:6px">Run another read to see your trend graph.</p>'; return; }
+  var W = 300, H = 120, pl = 22, pr = 8, pt = 10, pb = 8;
+  var X = function (i) { return pl + i * (W - pl - pr) / (n - 1); };
+  var Y = function (v) { return pt + (10 - v) * (H - pt - pb) / 10; };
+  var pts = h.map(function (r, i) { return X(i).toFixed(1) + ',' + Y(r.s).toFixed(1); });
+  var svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Trend of your last ' + n + ' scores">';
+  [0, 5, 10].forEach(function (v) { svg += '<line class="mg" x1="' + pl + '" x2="' + (W - pr) + '" y1="' + Y(v) + '" y2="' + Y(v) + '"/><text class="mt" x="' + (pl - 5) + '" y="' + (Y(v) + 3) + '" text-anchor="end">' + v + '</text>'; });
+  svg += '<polygon class="ma" points="' + X(0).toFixed(1) + ',' + Y(0) + ' ' + pts.join(' ') + ' ' + X(n - 1).toFixed(1) + ',' + Y(0) + '"/>';
+  svg += '<polyline class="ml" points="' + pts.join(' ') + '"/>';
+  h.forEach(function (r, i) { svg += '<circle class="md" cx="' + X(i).toFixed(1) + '" cy="' + Y(r.s).toFixed(1) + '" r="' + (i === n - 1 ? 5 : 3.5) + '"><title>' + r.s.toFixed(2) + '</title></circle>'; });
+  svg += '</svg>';
+  var d = h[n - 1].s - h[n - 2].s;
+  el.innerHTML = '<div class="note" style="margin-bottom:4px">Your trend · last ' + n + ' reads</div>' + svg + '<div class="note">' + (d >= 0 ? 'Up ' : 'Down ') + Math.abs(d).toFixed(2) + ' since your previous read</div>';
+}
+function renderHist() {
+  var h = loadHist().filter(function (r) { return r && typeof r.s === 'number'; }), box = $('hist-body');
+  if (!h.length) {
+    box.innerHTML = '<p class="note" style="margin-top:14px">No reads yet. Run the predictor and your scores will appear here.</p>';
+    $('hist-clear').hidden = true; return;
+  }
+  $('hist-clear').hidden = false;
+  var n = h.length, W = 600, H = 210, pl = 34, pr = 14, pt = 14, pb = 26;
+  var X = function (i) { return n === 1 ? pl + (W - pl - pr) / 2 : pl + i * (W - pl - pr) / (n - 1); };
+  var Y = function (v) { return pt + (10 - v) * (H - pt - pb) / 10; };
+  var sum = 0, best = h[0].s; h.forEach(function (r) { sum += r.s; if (r.s > best) best = r.s; });
+  var avg = sum / n, ch = n > 1 ? h[n - 1].s - h[n - 2].s : null;
+  var svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Line chart of your last ' + n + ' predicted scores">';
+  [0, 5, 10].forEach(function (v) { svg += '<line class="hg-l" x1="' + pl + '" x2="' + (W - pr) + '" y1="' + Y(v) + '" y2="' + Y(v) + '"/><text class="ht" x="' + (pl - 8) + '" y="' + (Y(v) + 4) + '" text-anchor="end">' + v + '</text>'; });
+  svg += '<polyline class="hl" points="' + h.map(function (r, i) { return X(i).toFixed(1) + ',' + Y(r.s).toFixed(1); }).join(' ') + '"/>';
+  h.forEach(function (r, i) { svg += '<circle class="hd" cx="' + X(i).toFixed(1) + '" cy="' + Y(r.s).toFixed(1) + '" r="5"><title>' + r.s.toFixed(2) + ' on ' + esc(new Date(r.t).toLocaleDateString()) + '</title></circle>'; });
+  svg += '<text class="ht" x="' + pl + '" y="' + (H - 6) + '">Oldest</text><text class="ht" x="' + (W - pr) + '" y="' + (H - 6) + '" text-anchor="end">Latest</text></svg>';
+  var rows = h.slice().reverse().map(function (r) {
+    return '<tr><td>' + esc(new Date(r.t).toLocaleDateString()) + '</td><td><b>' + r.s.toFixed(2) + '</b></td><td>' + esc(r.sl) + ' h</td><td>' + esc(r.sc) + ' h</td><td>' + esc(r.st) + '</td></tr>';
+  }).join('');
+  box.innerHTML =
+    '<div class="hsum"><div><b>' + n + '</b><span>Reads</span></div><div><b>' + avg.toFixed(2) + '</b><span>Average</span></div><div><b>' + best.toFixed(2) + '</b><span>Best</span></div>' +
+    (ch === null ? '' : '<div><b>' + (ch >= 0 ? '+' : '') + ch.toFixed(2) + '</b><span>Change since last read</span></div>') + '</div>' +
+    svg + '<div class="tw"><table><tr><th>Date</th><th>Score</th><th>Sleep</th><th>Screen time</th><th>Stress</th></tr>' + rows + '</table></div>';
+}
+$('hist-clear').addEventListener('click', function () {
+  if (confirm('Delete all saved scores from this browser?')) { try { localStorage.removeItem(HK); } catch (e) {} renderHist(); }
+});
+renderHist();
+</script>
 </body>
 </html>
